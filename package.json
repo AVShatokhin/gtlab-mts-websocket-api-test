@@ -1,0 +1,22 @@
+{
+  "name": "gtlab-mts-websocket-api-test",
+  "version": "1.0.0",
+  "description": "Тестовые скрипты для WEBSOCKET-API между UI (by МТС) и BACK-END (by GTLAB.Диагностика)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AVShatokhin/gtlab-mts-websocket-api-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AVShatokhin/gtlab-mts-websocket-api-test/issues"
+  },
+  "homepage": "https://github.com/AVShatokhin/gtlab-mts-websocket-api-test#readme",
+  "dependencies": {
+    "websocket": "^1.0.34"
+  }
+}
