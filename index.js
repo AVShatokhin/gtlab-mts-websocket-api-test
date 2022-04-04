@@ -1,6 +1,10 @@
+// let debug = "PING";
+// let debug = "ERRORS";
+let debug = "SIGNALS";
+
 let cmds = require("./cmds.js");
 
-console.log(cmds.ping("1"));
+//console.log(cmds.ping("1"));
 
 var WebSocketClient = require("websocket").client;
 
@@ -18,7 +22,7 @@ client.on("connect", async (connection) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve();
-      }, 1000);
+      }, ms);
     });
   };
 
@@ -32,27 +36,39 @@ client.on("connect", async (connection) => {
   connection.on("message", function (message) {
     if (message.type === "utf8") {
       console.log(JSON.parse(message.utf8Data));
-      //console.log("Received: '" +  + "'");
     }
   });
 
-  // =====
-  connection.sendUTF(JSON.stringify(cmds.error_BRF(id++)));
-  await sleep(1000);
-  connection.sendUTF(JSON.stringify(cmds.error_NEP(id++)));
-  await sleep(1000);
+  if (debug == "PING") {
+    for (j = 0; j < 100; j++) {
+      connection.sendUTF(JSON.stringify(cmds.ping(id++)));
+      await sleep(100);
+    }
+    await sleep(5000);
+    process.exit(0);
+  } else if (debug == "ERRORS") {
+    connection.sendUTF(JSON.stringify(cmds.error_BRF(id++)));
+    await sleep(100);
+    connection.sendUTF(JSON.stringify(cmds.error_NEP(id++)));
+    await sleep(100);
+    connection.sendUTF("sdfgsdfsdfsdf");
+    await sleep(5000);
+    process.exit(0);
+  } else if (debug == "SIGNALS") {
+    connection.sendUTF(JSON.stringify(cmds.describeChannels(id++)));
+    await sleep(100);
 
-  // =====
-  connection.sendUTF(JSON.stringify(cmds.ping(id++)));
-  await sleep(1000);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStart(id++)));
+    await sleep(5000);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStop(id++)));
 
-  // =====
-  connection.sendUTF("sdfgsdfsdfsdf");
-  await sleep(1000);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStart(id++)));
+    await sleep(5000);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStop(id++)));
 
-  // =====
-  connection.sendUTF(JSON.stringify(cmds.describeChannels(id++)));
-  await sleep(1000);
+    await sleep(5000);
+    process.exit(0);
+  }
 });
 
 client.connect("ws://127.0.0.1:8888/");
