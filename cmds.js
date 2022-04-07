@@ -14,6 +14,14 @@ module.exports = {
   ping: function (id) {
     return genRequest(id, "ping", {});
   },
+  signalTransform: function (id) {
+    return genRequest(id, "signalTransform", {
+      transformId: "furie",
+      sourcePath: "1.wav",
+      destinationPath: "2.wav",
+      transformParams: {},
+    });
+  },
   describeChannels: function (id) {
     return genRequest(id, "signalRecording.describeChannels", {});
   },
@@ -24,6 +32,35 @@ module.exports = {
   error_BRF: function (id) {
     // не достаточно параметров
     return genRequest_BRF(id, "ping", {});
+  },
+  plotter_start: function (id) {
+    return genRequest(id, "plotter.start", {
+      plotterId: 1,
+      rangeStart: 2,
+      rangeStop: 3,
+    });
+  },
+  plotter_stop: function (id) {
+    return genRequest(id, "plotter.stop", {
+      plotterId: 1,
+    });
+  },
+  plotter_plot: function (id) {
+    return genRequest(id, "plotter.plot", {
+      plotterId: 1,
+      rangeStart: 2,
+      rangeStop: 3,
+    });
+  },
+  plotter_stop_Not_Found: function (id) {
+    return genRequest(id, "plotter.stop", {
+      plotterId: 2,
+    });
+  },
+  plotter_selectStationaryIntervals: function (id) {
+    return genRequest(id, "plotter.selectStationaryIntervals", {
+      plotterId: 1,
+    });
   },
   signalRecordingStop: function (id) {
     return genRequest(id, "signalRecording.stop", {

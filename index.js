@@ -1,10 +1,10 @@
 // let debug = "PING";
 // let debug = "ERRORS";
-let debug = "SIGNALS";
+// let debug = "SIGNALS";
+// let debug = "PLOTTER";
+let debug = "TRANSFORM";
 
 let cmds = require("./cmds.js");
-
-//console.log(cmds.ping("1"));
 
 var WebSocketClient = require("websocket").client;
 
@@ -66,6 +66,33 @@ client.on("connect", async (connection) => {
     await sleep(5000);
     connection.sendUTF(JSON.stringify(cmds.signalRecordingStop(id++)));
 
+    await sleep(5000);
+    process.exit(0);
+  } else if (debug == "PLOTTER") {
+    for (j = 0; j < 10000; j++) {
+      connection.sendUTF(JSON.stringify(cmds.plotter_start(id++)));
+      await sleep(50);
+      connection.sendUTF(
+        JSON.stringify(cmds.plotter_selectStationaryIntervals(id++))
+      );
+      await sleep(50);
+      connection.sendUTF(JSON.stringify(cmds.plotter_plot(id++)));
+      await sleep(50);
+      connection.sendUTF(JSON.stringify(cmds.plotter_stop(id++)));
+      await sleep(50);
+      connection.sendUTF(JSON.stringify(cmds.plotter_plot(id++))); // not found
+      await sleep(50);
+      connection.sendUTF(
+        JSON.stringify(cmds.plotter_selectStationaryIntervals(id++))
+      ); // not found
+      await sleep(50);
+      connection.sendUTF(JSON.stringify(cmds.plotter_stop_Not_Found(id++)));
+      await sleep(50);
+    }
+    await sleep(5000);
+    process.exit(0);
+  } else if (debug == "TRANSFORM") {
+    connection.sendUTF(JSON.stringify(cmds.signalTransform(id++)));
     await sleep(5000);
     process.exit(0);
   }
