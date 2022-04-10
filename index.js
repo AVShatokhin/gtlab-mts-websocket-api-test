@@ -1,8 +1,8 @@
 // let debug = "PING";
 // let debug = "ERRORS";
-// let debug = "SIGNALS";
+let debug = "SIGNALS";
 // let debug = "PLOTTER";
-let debug = "TRANSFORM";
+// let debug = "TRANSFORM";
 
 let cmds = require("./cmds.js");
 
