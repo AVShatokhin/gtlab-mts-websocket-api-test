@@ -69,26 +69,26 @@ module.exports = {
   },
   signalRecordingStart: function (id) {
     return genRequest(id, "signalRecording.start", {
-      frameIntervalMillis: 101,
       recordingId: 1,
-      measurementsFrame: 102,
+      visualIntervalMillis: 2000,
+      visualFrameSize: 2,
       channels: [
         {
-          channelId: 1,
-          gainMultiplier: 0.2,
-          recordings: [
-            { transformId: 1, recordingPath: "/fdg/dfgdfg" },
-            { transformId: 2, recordingPath: "/dsfsdf//sdfsdf" },
-          ],
+          channelId: 0,
+          gainMultiplier: 0.12,
         },
         {
-          channelId: 2,
-          gainMultiplier: 0.3,
-          recordings: [
-            { transformId: 3, recordingPath: "/fdg/dfgdfg/ssdf" },
-            { transformId: 4, recordingPath: "/dsfsdf//sdfsdf/sdfsdf" },
-          ],
+          channelId: 1,
+          gainMultiplier: 0.21,
         },
+        // {
+        //   channelId: 2,
+        //   gainMultiplier: 0.31,
+        // },
+        // {
+        //   channelId: 3,
+        //   gainMultiplier: 0.13,
+        // },
       ],
     });
   },

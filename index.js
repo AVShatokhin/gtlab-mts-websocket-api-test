@@ -59,12 +59,12 @@ client.on("connect", async (connection) => {
     await sleep(100);
 
     connection.sendUTF(JSON.stringify(cmds.signalRecordingStart(id++)));
-    await sleep(5000);
+    await sleep(20000);
     connection.sendUTF(JSON.stringify(cmds.signalRecordingStop(id++)));
 
-    connection.sendUTF(JSON.stringify(cmds.signalRecordingStart(id++)));
-    await sleep(5000);
-    connection.sendUTF(JSON.stringify(cmds.signalRecordingStop(id++)));
+    // connection.sendUTF(JSON.stringify(cmds.signalRecordingStart(id++)));
+    // await sleep(5000);
+    // connection.sendUTF(JSON.stringify(cmds.signalRecordingStop(id++)));
 
     await sleep(5000);
     process.exit(0);
