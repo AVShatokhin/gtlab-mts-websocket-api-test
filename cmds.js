@@ -70,8 +70,8 @@ module.exports = {
   signalRecordingStart: function (id) {
     return genRequest(id, "signalRecording.start", {
       recordingId: 1,
-      visualIntervalMillis: 2000,
-      visualFrameSize: 2,
+      visualIntervalMillis: 1000,
+      visualFrameSize: 100,
       channels: [
         {
           channelId: 0,

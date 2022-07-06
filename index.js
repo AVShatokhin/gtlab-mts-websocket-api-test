@@ -35,7 +35,14 @@ client.on("connect", async (connection) => {
   });
   connection.on("message", function (message) {
     if (message.type === "utf8") {
-      console.log(JSON.parse(message.utf8Data));
+      let time = new Date();
+      let mess = JSON.parse(message.utf8Data);
+      if (debug == "SIGNALS") {
+        console.log(time.getSeconds() + "." + time.getMilliseconds());
+        console.log(mess.result);
+      } else {
+        console.log(mess);
+      }
     }
   });
 
@@ -58,6 +65,30 @@ client.on("connect", async (connection) => {
     connection.sendUTF(JSON.stringify(cmds.describeChannels(id++)));
     await sleep(100);
 
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStart(id++)));
+    await sleep(20000);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStop(id++)));
+    await sleep(100);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStart(id++)));
+    await sleep(20000);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStop(id++)));
+    await sleep(100);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStart(id++)));
+    await sleep(20000);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStop(id++)));
+    await sleep(100);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStart(id++)));
+    await sleep(20000);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStop(id++)));
+    await sleep(100);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStart(id++)));
+    await sleep(20000);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStop(id++)));
+    await sleep(100);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStart(id++)));
+    await sleep(20000);
+    connection.sendUTF(JSON.stringify(cmds.signalRecordingStop(id++)));
+    await sleep(100);
     connection.sendUTF(JSON.stringify(cmds.signalRecordingStart(id++)));
     await sleep(20000);
     connection.sendUTF(JSON.stringify(cmds.signalRecordingStop(id++)));
